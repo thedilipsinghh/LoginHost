@@ -18,8 +18,12 @@ const app = express()
 
 app.use(limiter)
 app.use(cors({
-    secure: process.env.NODE_ENV === 'production', httpOnly: true, credentials: true
-}))
+    origin: process.env.NODE_ENV === 'production'
+        ? 'https://client-one-gamma-21.vercel.app'
+        : 'http://localhost:3000',
+    credentials: true
+}));
+
 
 app.use(express.json()) // for req.body
 app.use(cookieParser()) // for req.cookies
